@@ -44,19 +44,16 @@ public class PeopleListAdapter extends BaseAdapter {
 
         if(convertView == null) {
             view =  LayoutInflater.from(mContext).inflate(R.layout.person_list_item, parent, false);
-            TextView name= (TextView) view.findViewById(R.id.attendeeRoleTextView);
+            TextView name= (TextView) view.findViewById(R.id.attendeeNameTextView);
             TextView role= (TextView) view.findViewById(R.id.attendeeRoleTextView);
             TextView attending= (TextView) view.findViewById(R.id.attendeAttendingTextView);
             name.setText(people.get(position).first_name + " "+ people.get(position).last_name);
             role.setText(people.get(position).role);
             attending.setText(people.get(position).person_reply);
-            TextView meeting_time= (TextView) view.findViewById(R.id.meeting_time);
-//            DateTime time=meetings[position].meeting_time;
-//            meeting_time.setText(time.getHourOfDay()+":"+time.getMinuteOfHour());
         }
         else {
             view = convertView;
         }
-        return null;
+        return view;
     }
 }

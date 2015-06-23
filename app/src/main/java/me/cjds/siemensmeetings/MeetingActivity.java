@@ -1,28 +1,41 @@
 package me.cjds.siemensmeetings;
 
+import android.app.Activity;
 import android.content.Intent;
 import android.support.v7.app.ActionBarActivity;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
+import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 
-public class MeetingActivity extends ActionBarActivity {
+public class MeetingActivity extends Activity {
 
     Meeting meeting;
-    Interval meeting_time;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_meeting);
         Intent i = getIntent();
         meeting = (Meeting) i.getParcelableExtra("meeting");
+
+        ImageButton calendar_button=(ImageButton) findViewById(R.id.calendar_button);
+        calendar_button.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                MeetingActivity.this.finish();
+            }
+        });
+        setUpMeeting(meeting);
 
     }
 
@@ -31,16 +44,17 @@ public class MeetingActivity extends ActionBarActivity {
         tv.setText(meeting.meeting_name);
 
         TextView tv2=(TextView) findViewById(R.id.meeting_time);
-        DateTime start=meeting_time.getStart();
-        DateTime end=meeting_time.getStart();
+        DateTime start=meeting.meeting_time.getStart();
+        DateTime end=meeting.meeting_time.getStart();
+        DateTimeFormatter formatter = DateTimeFormat.forPattern("hh:mm a");
+        DateTimeFormatter formatter2=DateTimeFormat.forPattern("dd MMM, YYYY");
         /* @TODO check if meeting is not on same day */
-        tv2.setText(start.getHourOfDay()+":"+start.getMinuteOfHour() +" - "+ end.getHourOfDay()+":"+end.getMinuteOfHour()+" "+start.getDayOfMonth()+" "+start.getMonthOfYear()+ " " +start.getYear());
+        tv2.setText(start.toString(formatter)+" - "+ end.toString(formatter)+"  "+start.toString(formatter2));
 
         ListView list=(ListView) findViewById(R.id.people_list);
 
-        ArrayAdapter<String> adapter=new ArrayAdapter<String>(this,R.layout.person_list_item,R.id.attendeeNameTextView
-        );
-        adapter.add((meeting.attendees.get(0).first_name));
+        PeopleListAdapter adapter=new PeopleListAdapter(this,meeting);
+
         list.setAdapter(adapter);
     }
 

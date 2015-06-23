@@ -1,4 +1,4 @@
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools" android:layout_width="match_parent"
     android:layout_height="match_parent" android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
@@ -16,15 +16,18 @@
         <TextView
             android:id="@+id/meeting_name"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:textSize="30dp"
+            android:layout_height="wrap_content"
+            android:textSize="100dp"
+            android:text="Hello"
+            android:textColor="#000"
             android:layout_gravity="center"
             />
         <TextView
             android:id="@+id/meeting_time"
             android:layout_width="wrap_content"
-            android:layout_height="40dp"
-            android:textSize="30dp"
+            android:layout_height="wrap_content"
+            android:textSize="40dp"
+            android:text="Hello"
             android:layout_gravity="center"
             />
     </LinearLayout>
@@ -40,23 +43,29 @@
                 android:layout_width="fill_parent"
                 android:layout_height="20dp">
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="Name"
+                    android:gravity="center"
                     android:textSize="16sp" >
                 </TextView>
                 <TextView
-                    android:layout_width="wrap_content"
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:text="Role"
+                    android:gravity="center"
                     android:textSize="16sp" >
                 </TextView>
 
                 <TextView
+                    android:layout_width="0dp"
+                    android:layout_weight="1"
                     android:text="Attending"
-                    android:layout_width="wrap_content"
+                    android:gravity="center"
                     android:layout_height="wrap_content"
                     android:padding="10dp"
                     android:textSize="16sp" >
@@ -78,13 +87,22 @@
         android:layout_height="0dp"
         android:orientation="horizontal"
         android:layout_weight="1">
+        <View android:layout_height="0dp"
+            android:layout_width="0dp"
+            android:layout_weight="1"
+            ></View>
         <ImageButton
             android:id="@+id/calendar_button"
-            android:layout_width="20dp"
-            android:layout_height="20dp" />
+            android:layout_width="200dp"
+            android:layout_height="fill_parent"
+            android:src="@drawable/calendaricon"
+            android:background="@null"
+            android:scaleType="fitCenter"/>
         <Button
-            android:layout_width="40dp"
-            android:layout_height="10dp"
-            android:text="Meeting Coming Up"/>
+            android:textSize="10dp"
+            android:layout_width="200dp"
+            android:layout_height="fill_parent"
+            android:text="Meeting Coming Up \n Automation \n 3:05 PM -5:05 PM"
+            android:lines="3"/>
     </LinearLayout>
-</RelativeLayout>
+</LinearLayout>
