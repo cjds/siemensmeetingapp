@@ -7,16 +7,84 @@
     android:orientation="vertical"
     tools:context="me.cjds.siemensmeetings.MeetingActivity">
 
-    <TextView
-        android:id="@+id/meeting_name"
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content" />
+    <LinearLayout
+        android:layout_height="0dp"
+        android:layout_width="fill_parent"
+        android:layout_weight="3"
+        android:orientation="vertical"
+        >
+        <TextView
+            android:id="@+id/meeting_name"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            />
+        <TextView
+            android:id="@+id/meeting_time"
+            android:layout_width="wrap_content"
+            android:layout_height="40dp"
+            android:textSize="30dp"
+            android:layout_gravity="center"
+            />
+    </LinearLayout>
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:layout_weight="3">
 
-    <ListView
-        android:id="@+id/people_list"
-        android:text="@string/hello_world"
-        android:layout_width="wrap_content"
-        android:layout_height="match_parent" />
+        <TableLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+            <TableRow
+                android:layout_width="fill_parent"
+                android:layout_height="20dp">
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Name"
+                    android:textSize="16sp" >
+                </TextView>
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:text="Role"
+                    android:textSize="16sp" >
+                </TextView>
 
+                <TextView
+                    android:text="Attending"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="10dp"
+                    android:textSize="16sp" >
+                </TextView>
+
+            </TableRow>
+        <ListView
+            android:id="@+id/people_list"
+            android:text="@string/hello_world"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            />
+        </TableLayout>
+
+    </ScrollView>
+
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="0dp"
+        android:orientation="horizontal"
+        android:layout_weight="1">
+        <ImageButton
+            android:id="@+id/calendar_button"
+            android:layout_width="20dp"
+            android:layout_height="20dp" />
+        <Button
+            android:layout_width="40dp"
+            android:layout_height="10dp"
+            android:text="Meeting Coming Up"/>
+    </LinearLayout>
 </RelativeLayout>
