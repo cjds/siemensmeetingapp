@@ -46,7 +46,7 @@ public class PeopleListAdapter extends BaseAdapter {
             view =  LayoutInflater.from(mContext).inflate(R.layout.person_list_item, parent, false);
             TextView name= (TextView) view.findViewById(R.id.attendeeNameTextView);
             TextView role= (TextView) view.findViewById(R.id.attendeeRoleTextView);
-            TextView attending= (TextView) view.findViewById(R.id.attendeAttendingTextView);
+            TextView attending= (TextView) view.findViewById(R.id.attendeeAttendingTextView);
             name.setText(people.get(position).first_name + " "+ people.get(position).last_name);
             role.setText(people.get(position).role);
             attending.setText(people.get(position).person_reply);

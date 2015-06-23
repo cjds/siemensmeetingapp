@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,6 +43,7 @@ public class  GridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
+
         return days.length + (days[0].day.getDayOfWeek()-Calendar.SUNDAY)+1;
     }
 
@@ -66,6 +68,10 @@ public class  GridAdapter extends BaseAdapter {
                 ListView lv = (ListView) view.findViewById(R.id.meeting_list);
                 lv.setAdapter(new CalendarListAdapter(mContext, days[position-days[0].day.getDayOfWeek()].meetings));
                 DateTime day = days[position-days[0].day.getDayOfWeek()].day;
+                DateTime now=DateTime.now();
+                if(day.getDayOfYear()==now.getDayOfYear() && day.getYear()==now.getYear()){
+                    ((LinearLayout) view.findViewById(R.id.calendar_linear_layout)).setBackgroundColor(mContext.getResources().getColor(R.color.selection_blue));
+                }
                 day_number.setText(day.getDayOfMonth()+"");
             }
         }

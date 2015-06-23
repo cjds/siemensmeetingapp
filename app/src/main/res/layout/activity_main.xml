@@ -21,6 +21,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:gravity="center"
+            android:textSize="50sp"
             android:text="Hello 2014"/>
         <Button
             android:id="@+id/calendar_next_button"

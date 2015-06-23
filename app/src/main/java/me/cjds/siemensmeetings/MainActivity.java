@@ -35,6 +35,7 @@ public class MainActivity extends Activity implements AsyncResponse{
     Calendar current;
     TextView month_year;
     int currentActiveDay=-1;
+    DataFetchHandler dataFetchHandler;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -43,8 +44,7 @@ public class MainActivity extends Activity implements AsyncResponse{
         gv=(GridView) findViewById(R.id.caldendarview);
         current = Calendar.getInstance();
         current.set(Calendar.DAY_OF_MONTH,1);
-        DataFetchHandler dataFetchHandler=new DataFetchHandler(this);
-        dataFetchHandler.execute();
+        new DataFetchHandler(this).execute();
         Button back = (Button)findViewById(R.id.calendar_back_button);
         back.setOnClickListener(new View.OnClickListener() {
 
@@ -55,9 +55,9 @@ public class MainActivity extends Activity implements AsyncResponse{
                 if (month - 1 > 0) {
                     current.set(year, month - 1, 1);
                 } else {
-                    current.set(year - 1, 11, 1);
+                    current.set(year - 1, 11,1 );
                 }
-                populateView();
+                new DataFetchHandler(MainActivity.this).execute();
             }
         });
         Button next = (Button)findViewById(R.id.calendar_next_button);
@@ -71,9 +71,9 @@ public class MainActivity extends Activity implements AsyncResponse{
                     current.set(year,month+1,1);
                 }
                 else{
-                    current.set(year+1,1,1);
+                    current.set(year+1,0,1);
                 }
-                populateView();
+                new DataFetchHandler(MainActivity.this).execute();
             }
         });
 
@@ -86,11 +86,10 @@ public class MainActivity extends Activity implements AsyncResponse{
         //set up dialog
 
         gv.setNumColumns(7);
-
     }
 
     public void populateView(){
-
+        Log.e("SD","SD");
         int year = current.get(Calendar.YEAR);
         int month = current.get(Calendar.MONTH);
         month_year.setText(current.getDisplayName(Calendar.MONTH, Calendar.LONG, Locale.US)+" "+ year);
@@ -147,21 +146,24 @@ public class MainActivity extends Activity implements AsyncResponse{
     public void doSomething(String s) {
         //THIS CONVERTS THE JSON INTO AN ARRAYLIST OF ARRAYLISTS
         try {
+            meetings=new ArrayList<ArrayList<Meeting>>();
             ArrayList<Person> persons= new ArrayList<Person>();
             persons.add(new Person("Carl","Saldanha","CEO","Attending"));
-            persons.add(new Person("Carl","Saldanha","CEO","Never gonna come"));
+            persons.add(new Person("Carl", "John", "CEO", "Never gonna come"));
             JSONArray jsonArray=new JSONArray(s);
             for(int i=0;i<current.getActualMaximum(Calendar.DAY_OF_MONTH);i++){
                 meetings.add(new ArrayList<Meeting>());
-                for(int j=0;i<jsonArray.length();j++) {
+                Log.e("SD",jsonArray.length()+"");
+                for(int j=0;j<jsonArray.length();j++) {
                     JSONObject json=jsonArray.getJSONObject(j);
-                    if(json.getString("hello")=="there")
+                    if(json.getString("hello").equals("there"))
                         meetings.get(i).add(new Meeting("hello", new Interval(new DateTime(),new DateTime()),persons));
                 }
             }
             populateView();
 
         } catch (JSONException e) {
+
             e.printStackTrace();
         }
 
