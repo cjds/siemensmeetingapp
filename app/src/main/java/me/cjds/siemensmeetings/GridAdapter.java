@@ -19,7 +19,7 @@ import java.util.GregorianCalendar;
 /**
  * Created by Carl Saldanha on 6/13/2015.
  */
-public class GridAdapter extends BaseAdapter {
+public class  GridAdapter extends BaseAdapter {
     private Context mContext;
     private DateTime date;
     private Day[] days;
@@ -30,8 +30,6 @@ public class GridAdapter extends BaseAdapter {
         calendar=new GregorianCalendar(year,month,1);
 
         mContext=c;
-        int currentDay = calendar.get(Calendar.DAY_OF_WEEK);
-        calendar.add(Calendar.DAY_OF_YEAR, Calendar.SUNDAY - currentDay);
         days=new Day[meetings.size()];
 
         for(int i=0;i<meetings.size();i++) {
@@ -64,7 +62,7 @@ public class GridAdapter extends BaseAdapter {
         View view;
 
         if(convertView == null) {
-
+            if(day[-Calendar.SUNDAY>)
             view = LayoutInflater.from(mContext).inflate(R.layout.grid_layout, parent, false);
             TextView day_number =(TextView) view.findViewById(R.id.day_number);
             ListView lv=(ListView)view.findViewById(R.id.meeting_list);

@@ -50,9 +50,6 @@ public class PeopleListAdapter extends BaseAdapter {
             name.setText(people.get(position).first_name + " "+ people.get(position).last_name);
             role.setText(people.get(position).role);
             attending.setText(people.get(position).person_reply);
-            TextView meeting_time= (TextView) view.findViewById(R.id.meeting_time);
-//            DateTime time=meetings[position].meeting_time;
-//            meeting_time.setText(time.getHourOfDay()+":"+time.getMinuteOfHour());
         }
         else {
             view = convertView;

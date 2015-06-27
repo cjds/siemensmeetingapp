@@ -15,33 +15,32 @@ import android.widget.ListView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
+import org.json.JSONArray;
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.Calendar;
 
 
-public class MainActivity extends ActionBarActivity {
+public class MainActivity extends ActionBarActivity implements AsyncResponse{
 
     GridView gv;
     Dialog dialog;
     ArrayList<ArrayList<Meeting>> meetings=new ArrayList<ArrayList<Meeting>>();
+    Calendar current;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-
-        ArrayList<Person> persons= new ArrayList<Person>();
-        persons.add(new Person("Carl","Saldanha","CEO","Attending"));
-        persons.add(new Person("Carl","Saldanha","CEO","Never gonna come"));
-        for(int i=0;i<2;i++) {
-            meetings.add(new ArrayList<Meeting>());
-            for (int j = 0; j < 2; j++) {
-                meetings.get(i).add(new Meeting("hello", new Interval(new DateTime(),new DateTime()),persons));
-            }
-        }
         gv=(GridView) findViewById(R.id.caldendarview);
+        DataFetchHandler dataFetchHandler=new DataFetchHandler(this);
+        dataFetchHandler.doInBackground();
+        current = Calendar.getInstance();
+    }
 
+    public void populateView(){
         //set up dialog
         dialog=new Dialog(this);
         dialog.setContentView(R.layout.custom_dialog);
@@ -63,14 +62,13 @@ public class MainActivity extends ActionBarActivity {
 
                     }
                 });
-
             }
-
         });
-        gv.setAdapter(new GridAdapter(this, meetings, 2014, Calendar.AUGUST));
-
-
+        int year = current.get(Calendar.YEAR);
+        int month = current.get(Calendar.MONTH);
+        gv.setAdapter(new GridAdapter(this, meetings, year, month));
     }
+
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -91,5 +89,31 @@ public class MainActivity extends ActionBarActivity {
         }
 
         return super.onOptionsItemSelected(item);
+    }
+
+    @Override
+    public void doSomething(String s) {
+        //THIS CONVERTS THE JSON INTO AN ARRAYLIST OF ARRAYLISTS
+        try {
+            ArrayList<Person> persons= new ArrayList<Person>();
+            persons.add(new Person("Carl","Saldanha","CEO","Attending"));
+            persons.add(new Person("Carl","Saldanha","CEO","Never gonna come"));
+            JSONArray jsonArray=new JSONArray(s);
+            for(int k=0;current.get(Calendar.DAY_OF_WEEK)){
+
+            }
+            for(int i=0;i<jsonArray.length();i++){
+                JSONObject json=jsonArray.getJSONObject(i);
+                meetings.add(new ArrayList<Meeting>());
+                for (int j = 0; j < 2; j++) {
+                    meetings.get(i).add(new Meeting("hello", new Interval(new DateTime(),new DateTime()),persons));
+                }
+            }
+            populateView();
+
+        } catch (JSONException e) {
+            e.printStackTrace();
+        }
+
     }
 }
