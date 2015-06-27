@@ -6,6 +6,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.TextView;
 
@@ -42,13 +43,12 @@ public class  GridAdapter extends BaseAdapter {
 
     @Override
     public int getCount() {
-        return days.length;
+
+        return days.length + (days[0].day.getDayOfWeek()-Calendar.SUNDAY)+1;
     }
 
     @Override
     public Object getItem(int position) {
-        Calendar cal=calendar;
-        cal.add(Calendar.DAY_OF_YEAR,position);
         return null;
     }
 
@@ -62,6 +62,7 @@ public class  GridAdapter extends BaseAdapter {
         View view;
 
         if(convertView == null) {
+<<<<<<< HEAD
             if(day[-Calendar.SUNDAY>)
             view = LayoutInflater.from(mContext).inflate(R.layout.grid_layout, parent, false);
             TextView day_number =(TextView) view.findViewById(R.id.day_number);
@@ -69,6 +70,20 @@ public class  GridAdapter extends BaseAdapter {
             lv.setAdapter(new CalendarListAdapter(mContext,days[position].meetings));
             DateTime day = days[position].day;
             day_number.setText(day.getDayOfMonth()+" "+day.getYear());
+=======
+                view = LayoutInflater.from(mContext).inflate(R.layout.grid_layout, parent, false);
+            if(days[0].day.getDayOfWeek()-Calendar.SUNDAY<position) {
+                TextView day_number = (TextView) view.findViewById(R.id.day_number);
+                ListView lv = (ListView) view.findViewById(R.id.meeting_list);
+                lv.setAdapter(new CalendarListAdapter(mContext, days[position-days[0].day.getDayOfWeek()].meetings));
+                DateTime day = days[position-days[0].day.getDayOfWeek()].day;
+                DateTime now=DateTime.now();
+                if(day.getDayOfYear()==now.getDayOfYear() && day.getYear()==now.getYear()){
+                    ((LinearLayout) view.findViewById(R.id.calendar_linear_layout)).setBackgroundColor(mContext.getResources().getColor(R.color.selection_blue));
+                }
+                day_number.setText(day.getDayOfMonth()+"");
+            }
+>>>>>>> eba1926a0021c21f6f0a86e78d209af84342a555
         }
         else {
             view = convertView;

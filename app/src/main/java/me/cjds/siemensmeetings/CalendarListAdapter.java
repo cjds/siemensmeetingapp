@@ -9,6 +9,8 @@ import android.widget.TextView;
 
 import org.joda.time.DateTime;
 import org.joda.time.Interval;
+import org.joda.time.format.DateTimeFormat;
+import org.joda.time.format.DateTimeFormatter;
 
 import java.util.ArrayList;
 
@@ -49,7 +51,9 @@ public class CalendarListAdapter extends BaseAdapter {
             meeting_name.setText(meetings.get(position).meeting_name);
             TextView meeting_time= (TextView) view.findViewById(R.id.meeting_time);
             Interval time=meetings.get(position).meeting_time;
-            meeting_time.setText(time.getStart().getHourOfDay()+":"+time.getStart().getMinuteOfHour());
+            DateTimeFormatter formatter = DateTimeFormat.forPattern("hh:mm a");
+
+            meeting_time.setText(time.getStart().toString(formatter));
         }
         else {
             view = convertView;
