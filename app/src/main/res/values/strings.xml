@@ -4,4 +4,15 @@
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
     <string name="title_activity_meeting">Meeting Activity</string>
+    <string name="title_activity_agenda">AgendaActivity</string>
+    <string name="agenda_button">Back to Agenda</string>
+
+    <string name="preference_meeting_key">preference_meetings</string>
+
+    <string-array name="rooms">
+            <item>Mercury</item>
+            <item>Venus</item>
+            <item>Earth</item>
+            <item>Mars</item>
+    </string-array>
 </resources>

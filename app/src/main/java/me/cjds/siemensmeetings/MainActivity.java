@@ -27,37 +27,23 @@ import java.util.Calendar;
 import java.util.Locale;
 
 
-<<<<<<< HEAD
-public class MainActivity extends ActionBarActivity implements AsyncResponse{
-=======
 public class MainActivity extends Activity implements AsyncResponse{
->>>>>>> eba1926a0021c21f6f0a86e78d209af84342a555
 
     GridView gv;
     Dialog dialog;
     ArrayList<ArrayList<Meeting>> meetings=new ArrayList<ArrayList<Meeting>>();
     Calendar current;
-<<<<<<< HEAD
-=======
     TextView month_year;
     int currentActiveDay=-1;
     DataFetchHandler dataFetchHandler;
->>>>>>> eba1926a0021c21f6f0a86e78d209af84342a555
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         gv=(GridView) findViewById(R.id.caldendarview);
-<<<<<<< HEAD
         DataFetchHandler dataFetchHandler=new DataFetchHandler(this);
         dataFetchHandler.doInBackground();
-        current = Calendar.getInstance();
-    }
-
-    public void populateView(){
-        //set up dialog
-=======
         current = Calendar.getInstance();
         current.set(Calendar.DAY_OF_MONTH,1);
         new DataFetchHandler(this).execute();
@@ -94,9 +80,6 @@ public class MainActivity extends Activity implements AsyncResponse{
         });
 
         month_year= (TextView)findViewById(R.id.month_year_text);
-
-
->>>>>>> eba1926a0021c21f6f0a86e78d209af84342a555
         dialog=new Dialog(this);
         dialog.setContentView(R.layout.custom_dialog);
         dialog.setTitle("Meeting List");
@@ -114,7 +97,7 @@ public class MainActivity extends Activity implements AsyncResponse{
         gv.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-<<<<<<< HEAD
+
                 dialog.show();
                 ListView l = (ListView) dialog.findViewById(R.id.dialog_meeting_list);
                 l.setAdapter(new MeetingAdapter(dialog.getContext(), meetings.get(position)));
@@ -129,32 +112,6 @@ public class MainActivity extends Activity implements AsyncResponse{
                 });
             }
         });
-        int year = current.get(Calendar.YEAR);
-        int month = current.get(Calendar.MONTH);
-        gv.setAdapter(new GridAdapter(this, meetings, year, month));
-=======
-
-                if(position +1>=current.get(Calendar.DAY_OF_WEEK)) {
-                    dialog.show();
-                    //move position to the one pointing to the first day of the month
-                    int pos2 = position +1 - current.get(Calendar.DAY_OF_WEEK) ;
-                    ListView l = (ListView) dialog.findViewById(R.id.dialog_meeting_list);
-                    l.setAdapter(new MeetingAdapter(dialog.getContext(), meetings.get(pos2)));
-                    currentActiveDay = pos2;
-                    l.setOnItemClickListener(new AdapterView.OnItemClickListener() {
-                        @Override
-                        public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                            dialog.dismiss();
-                            Intent intent = new Intent(MainActivity.this, MeetingActivity.class);
-                            intent.putExtra("meeting", meetings.get(currentActiveDay).get(position));
-                            startActivity(intent);
-
-                        }
-                    });
-                }
-            }
-        });
->>>>>>> eba1926a0021c21f6f0a86e78d209af84342a555
     }
 
 
@@ -183,20 +140,7 @@ public class MainActivity extends Activity implements AsyncResponse{
     public void doSomething(String s) {
         //THIS CONVERTS THE JSON INTO AN ARRAYLIST OF ARRAYLISTS
         try {
-<<<<<<< HEAD
-            ArrayList<Person> persons= new ArrayList<Person>();
-            persons.add(new Person("Carl","Saldanha","CEO","Attending"));
-            persons.add(new Person("Carl","Saldanha","CEO","Never gonna come"));
-            JSONArray jsonArray=new JSONArray(s);
-            for(int k=0;current.get(Calendar.DAY_OF_WEEK)){
 
-            }
-            for(int i=0;i<jsonArray.length();i++){
-                JSONObject json=jsonArray.getJSONObject(i);
-                meetings.add(new ArrayList<Meeting>());
-                for (int j = 0; j < 2; j++) {
-                    meetings.get(i).add(new Meeting("hello", new Interval(new DateTime(),new DateTime()),persons));
-=======
             meetings=new ArrayList<ArrayList<Meeting>>();
             ArrayList<Person> persons= new ArrayList<Person>();
             persons.add(new Person("Carl","Saldanha","CEO","Attending"));
@@ -209,16 +153,11 @@ public class MainActivity extends Activity implements AsyncResponse{
                     JSONObject json=jsonArray.getJSONObject(j);
                     if(json.getString("hello").equals("there"))
                         meetings.get(i).add(new Meeting("hello", new Interval(new DateTime(),new DateTime()),persons));
->>>>>>> eba1926a0021c21f6f0a86e78d209af84342a555
                 }
             }
             populateView();
 
         } catch (JSONException e) {
-<<<<<<< HEAD
-=======
-
->>>>>>> eba1926a0021c21f6f0a86e78d209af84342a555
             e.printStackTrace();
         }
 

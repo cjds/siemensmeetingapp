@@ -1,0 +1,47 @@
+<PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android">
+    <!-- NOTE: Hide buttons to simplify the UI. Users can touch outside the dialog to
+         dismiss it. -->
+    <!-- NOTE: ListPreference's summary should be set to its value by the activity code. -->
+    <EditTextPreference
+        android:key="settingurl"
+        android:title="Choose URL for Settings"
+        android:summary="You have to go back and come here again once set"
+        android:defaultValue="http://www.example.com"
+        />
+    <EditTextPreference
+        android:key="ipaddressurl"
+        android:title="Choose URL for Meetings"
+        android:defaultValue="http://www.example.com"
+        />
+
+    <EditTextPreference
+        android:key="roomnameparameter"
+        android:title="Change POST parameter for room name"
+        android:defaultValue="roomname"
+        />
+    <EditTextPreference
+        android:key="dateTimeFormat"
+        android:title="Choose Date Time Format for POST"
+        android:defaultValue="dd/mm/yyyy"
+        />
+
+    <EditTextPreference
+        android:key="datetime"
+        android:title="Choose Date Time variable for POST"
+        android:defaultValue="date"
+        />
+    <EditTextPreference
+        android:key="timeBetweenRuns"
+        android:title="Choose number of minutes between runs of updates"
+        android:defaultValue="1"
+        />
+
+
+    <ListPreference
+        android:key="roomname"
+        android:title="@string/pref_title_rooom"
+        android:defaultValue="-1"
+        android:negativeButtonText="@null"
+        android:positiveButtonText="@null" />
+
+</PreferenceScreen>
